@@ -35,12 +35,13 @@ namespace ProvaOO2.Controllers
             }
             return View(model);
         }
-        public ActionResult Logar(string login, string senha)
+        [HttpPost]
+        public ActionResult Logar()
         {
             Conta conta = new Conta();
             using (db)
             {
-                conta = db.conta.Where(c => c.login == login && c.senha == senha).First();
+                conta = db.conta.Where(c => c.login == Request["login"] && c.senha == Request["senha"]).First();
                 Session[strSessionConta] = conta;
             }
             return RedirectToAction($"Details/{conta.contaId}");
