@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProvaOO.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cliente</h2>
+
+<p>
+    @Html.ActionLink("Criar Cliente", "Create")
+</p>
+
+<form asp-controller="ClientesController" asp-action="Index" style="width:90%;">
+    <p align="center">
+        Nome: <input type="text" name="nome">
+        <input type="submit" value="Pesquisar" />
+    </p>
+</form>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Cpf
+        </th>
+
+        <th>
+            E-mail
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.cpf)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.clienteId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.clienteId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.clienteId })
+            </td>
+        </tr>
+    }
+
+</table>
